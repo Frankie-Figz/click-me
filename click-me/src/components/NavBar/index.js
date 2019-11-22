@@ -1,30 +1,20 @@
 import React from "react";
 import "./style.css";
 
-function FriendCard(props) {
+function NavTabs(props) {
   return (
-    <div className="card">
-      <div className="img-container">
-        <img alt={props.name} src={props.image} />
-      </div>
-      <div className="content">
-        <ul>
-          <li>
-            <strong>Name:</strong> {props.name}
-          </li>
-          <li>
-            <strong>Occupation:</strong> {props.occupation}
-          </li>
-          <li>
-            <strong>Address:</strong> {props.location}
-          </li>
-        </ul>
-      </div>
-      <span className="remove" onClick={() => props.removeFriend(props.id)}>
-        𝘅
-      </span>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img className = "logo" width = "200" height = "100" src= "click-me.png" />
+      <ul className="nav nav-tabs">
+        <li className="nav-item">
+            Current Score : {props.currentScore}
+        </li>
+        <li className="nav-item">
+            High Score : {props.highScore}
+        </li>
+      </ul>
+    </nav>
   );
 }
 
-export default FriendCard;
+export default NavTabs;

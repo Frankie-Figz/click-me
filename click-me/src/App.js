@@ -1,42 +1,40 @@
 import React, { Component } from "react";
 import Wrapper from "./components/Wrapper";
 import FriendCard from "./components/FriendCard";
+import NavBar from "./components/NavBar";
 import friends from "./friend.json";
 
 class App extends Component{
   state = {
     friends : friends,
     currentScore : 0,
-    highScore : 0
+    highScore : 0,
+    messageUser : ""
   };
 
   resetClicked = arr => {
+    this.state.currentScore = 0;
     for(var key in arr)
       this.state.friends[key].clicked = false;
   }
 
-  removeFriend = id => {
-    // const friends = this.state.friends.filter(friend => friend.id !== id);
+  checkClick = id => {
     for(var key in friends){
       if(friends[key].id === id){
         if(friends[key].clicked){
-          console.log("I've already been clicked ! " + this.state.friends[key].name);
+          this.state.messageUser = "You Guessed Incorrectly !";
           this.resetClicked(friends);
-          this.state.currentScore = 0;
           console.log("The CURRENT high score : " + this.state.highScore);
-          if(this.state.currentScore > this.state.highScore){
-            console.log("The NEW high score : " + this.state.highScore);
-            this.state.highScore = this.state.currentScore;
-            }
           } else {
-          this.state.currentScore++;
-          this.state.friends[key].clicked = true;
-          console.log("The CURRENT score is : " + this.state.currentScore);
-          if(this.state.currentScore > this.state.highScore){
-            console.log("The NEW high score : " + this.state.highScore);
-            this.state.highScore = this.state.currentScore;
-            }
-        }
+              this.state.messageUser = "You Guessed Correctly !";
+              this.state.currentScore++;
+              this.state.friends[key].clicked = true;
+              console.log("The CURRENT score is : " + this.state.currentScore);
+              if(this.state.currentScore > this.state.highScore){
+                console.log("The NEW high score : " + this.state.highScore);
+                this.state.highScore = this.state.currentScore;
+              };
+          }
       };
     };
     this.doShuffle(friends);
@@ -56,18 +54,23 @@ class App extends Component{
   render() {
     return (
       <Wrapper>
-        {this.state.friends.map(friend => (
-          <FriendCard
-            removeFriend = {this.removeFriend}
-            id = {friend.id}
-            key = {friend.id}
-            name = {friend.name}
-            image = {friend.image}
-            occupation = {friend.occupation}
-            location = {friend.location}
-            clicked = {friend.clicked}
-          />
-        ))}
+        <div class = "container-fluid">
+          <NavBar currentScore = {this.state.currentScore} highScore = {this.state.highScore}> </NavBar>
+        </div>
+
+          {this.state.friends.map(friend => (
+            <FriendCard
+              checkClick = {this.checkClick}
+              id = {friend.id}
+              key = {friend.id}
+              name = {friend.name}
+              image = {friend.image}
+              occupation = {friend.occupation}
+              location = {friend.location}
+              clicked = {friend.clicked}
+            />
+          ))}
+
       </Wrapper>
     )
   };
