@@ -12,6 +12,7 @@ class App extends Component{
     messageUser : ""
   };
 
+  // Function that resets the been-clicked
   resetClicked = arr => {
     this.state.currentScore = 0;
     for(var key in arr)
@@ -55,7 +56,7 @@ class App extends Component{
     return (
       <Wrapper>
         <div class = "container-fluid">
-          <NavBar currentScore = {this.state.currentScore} highScore = {this.state.highScore}> </NavBar>
+          <NavBar currentScore = {this.state.currentScore} highScore = {this.state.highScore} messageUser = {this.state.messageUser}> </NavBar>
         </div>
 
           {this.state.friends.map(friend => (

@@ -12,6 +12,10 @@ function NavTabs(props) {
         <li className="nav-item">
             High Score : {props.highScore}
         </li>
+        {props.messageUser === "You Guessed Incorrectly !" ? 
+          (<li className="nav-item incorrect"> {props.messageUser} </li>) : 
+            (<li className="nav-item correct">{props.messageUser}</li>
+        )}
       </ul>
     </nav>
   );

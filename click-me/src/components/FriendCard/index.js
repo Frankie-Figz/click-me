@@ -3,7 +3,7 @@ import "./style.css";
 
 function FriendCard(props) {
   return (
-    <div className="card">
+    <div className="card" onClick={() => props.checkClick(props.id)}>
       <div className="img-container">
         <img alt={props.name} src={props.image} />
       </div>
@@ -15,14 +15,8 @@ function FriendCard(props) {
           <li>
             <strong>Occupation:</strong> {props.occupation}
           </li>
-          <li>
-            <strong>Address:</strong> {props.location}
-          </li>
         </ul>
       </div>
-      <span className="remove" onClick={() => props.checkClick(props.id)}>
-        𝘅
-      </span>
     </div>
   );
 }
